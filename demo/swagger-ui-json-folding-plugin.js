@@ -709,18 +709,44 @@ var JSONFold = function (_Component) {
   _inherits(JSONFold, _Component);
 
   function JSONFold() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, JSONFold);
 
-    return _possibleConstructorReturn(this, (JSONFold.__proto__ || Object.getPrototypeOf(JSONFold)).apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = JSONFold.__proto__ || Object.getPrototypeOf(JSONFold)).call.apply(_ref, [this].concat(args))), _this), _this.initializeComponent = function (c) {
+      _this.el = c;
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(JSONFold, [{
     key: "render",
     value: function render() {
-      var value = this.props.value;
+      var _props = this.props,
+          value = _props.value,
+          className = _props.className;
 
-      var data = JSON.parse(value);
-      return _react2.default.createElement(_reactJsonView2.default, { src: data, theme: "monokai", name: false });
+      className = className || "";
+      var data = null;
+      try {
+        data = JSON.parse(value);
+      } catch (e) {
+        data = null;
+      }
+      if (data) {
+        return _react2.default.createElement(_reactJsonView2.default, { src: data, theme: "monokai", name: false });
+      }
+
+      return _react2.default.createElement(
+        "pre",
+        { ref: this.initializeComponent, className: className + " microlight" },
+        value
+      );
     }
   }]);
 
@@ -731,7 +757,8 @@ exports.default = JSONFold;
 
 
 JSONFold.propTypes = {
-  value: _propTypes2.default.string.isRequired
+  value: _propTypes2.default.string.isRequired,
+  className: _propTypes2.default.string
 };
 
 /***/ }),
