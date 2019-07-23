@@ -5,13 +5,15 @@ module.exports = {
         "swagger-ui-json-folding-plugin" : "./src/index.js"
     },
     module: {
-        rules: [{
-			test: /\.js?$/,
-			oneOf: [{            
-				exclude: /node_modules/,
-				loader: 'babel-loader'       
-			}]
-		}],
+		rules: [
+		  {
+			test: /\.(js|jsx)$/,
+			exclude: /node_modules/,
+			use: {
+			  loader: "babel-loader"
+			}
+		  }
+		]
     },
     resolve: {
         extensions: ['.js', '.jsx']
