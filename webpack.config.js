@@ -4,6 +4,7 @@ module.exports = {
   entry: {
     "swagger-ui-json-folding-plugin": "./src/index.js"
   },
+  mode: "production",
   module: {
     rules: [
       {
@@ -28,9 +29,5 @@ module.exports = {
     publicPath: '/',
     filename: '[name].js',
     library: 'jsonFoldingPlugin',
-  },
-  devServer: {
-    contentBase: './demo',
-    port: 9000
   }
 };
