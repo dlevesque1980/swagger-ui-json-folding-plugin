@@ -1,9 +1,9 @@
-import JSONFold from "./JSONFold.js"
+import JSONFold from "./JSONFold"
 
 export default function () {
   return {
     components: {
-        highlightCode: JSONFold
+      highlightCode: JSONFold
     }
   }
 }
