@@ -15,5 +15,11 @@ You include the script
 ```
 in swagger-initializer.js, add SwaggerJsonFoldingPlugins in the plugins: 
 ```javascript
-SwaggerUIStandalonePreset.unshift(jsonFoldingPlugin.default);
+plugins: [
+    SwaggerUIBundle.plugins.DownloadUrl,
+    SwaggerJsonFoldingPlugins
+],
 ```
+# Credits
+
+This plugins is using a web component develop by Alessandro (https://github.com/alenaksu/json-viewer)
