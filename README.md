@@ -11,10 +11,9 @@ In the demo folder you can see how I modified index.html to make this work.
 
 You include the script 
 ```
-<script src="./swagger-ui-json-folding-plugin.js"></script>
+<script src="./swagger-ui-json-folding-plugin.js" charset="UTF-8"></script>
 ```
-and then just before you declare your SwaggerUIBundle config, 
-You add this line
+in swagger-initializer.js, add SwaggerJsonFoldingPlugins in the plugins: 
 ```javascript
 SwaggerUIStandalonePreset.unshift(jsonFoldingPlugin.default);
 ```

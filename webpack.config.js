@@ -1,33 +1,34 @@
-const TerserPlugin = require('terser-webpack-plugin');
+const path = require("path");
 
 module.exports = {
-  entry: {
-    "swagger-ui-json-folding-plugin": "./src/index.js"
+  entry: "./src/index.jsx",
+  mode: 'production',
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "swagger-ui-json-folding-plugin.js",
   },
-  mode: "production",
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: "babel-loader",
+          options: {
+            presets: [
+              "@babel/preset-env",
+              "@babel/preset-react",
+            ]
+          }
         }
+      },
+      {
+        test: /\.css$/,
+        loader: 'lit-css-loader'
       }
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx']
-  },
-  optimization: {
-    minimize: true,
-    minimizer: [new TerserPlugin()],
-  },
-  devtool: 'source-map',
-  output: {
-    path: __dirname + '/dist',
-    publicPath: '/',
-    filename: '[name].js',
-    library: 'jsonFoldingPlugin',
+    extensions: [".js", ".jsx"]
   }
-};
+}
