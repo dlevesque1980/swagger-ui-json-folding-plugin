@@ -1,6 +1,11 @@
 import React from 'react'
 import '../packages/JsonViewer/dist/json-viewer'
 
+
+
+  const uid = () => Date.now().toString(36) + Math.random().toString(36).substr(2);
+  
+
 // From: https://raw.githubusercontent.com/chilts/umd-template/master/template.js
 ; ((f) => {
   // module name and requires
@@ -40,6 +45,11 @@ import '../packages/JsonViewer/dist/json-viewer'
       wrapComponents: {
         HighlightCode:  (Original, system) => class WrappedHightlightCode extends React.Component {
           
+          constructor(props) {
+            super(props);
+            this.id = uid();
+          }
+
           shouldComponentUpdate(nextProps) {        
             const nextChildren = nextProps.children;
             const { children } = this.props 
@@ -53,14 +63,13 @@ import '../packages/JsonViewer/dist/json-viewer'
             const { children } = this.props
             const canJSON = JSON.parse(children) !== null
             if (canJSON) {
-              const elem_json = document.querySelector('#json');
+              const elem_json = document.querySelector(`#${this.id}`);
               if (elem_json !== null) {
                 elem_json.data = JSON.parse(children);
-                return;
               }
               return (
                 <div className="highlight-code">              
-                  <json-viewer id="json">{children}</json-viewer>
+                  <json-viewer id={this.id}>{children}</json-viewer>
                 </div>
               )
             }
