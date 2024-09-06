@@ -4,7 +4,14 @@ import '../packages/JsonViewer/dist/json-viewer'
 
 
   const uid = () => Date.now().toString(36) + Math.random().toString(36).substr(2);
-  
+  const isValidJson = function(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+};
 
 // From: https://raw.githubusercontent.com/chilts/umd-template/master/template.js
 ; ((f) => {
@@ -61,8 +68,7 @@ import '../packages/JsonViewer/dist/json-viewer'
           
           render() {
             const { children } = this.props
-            const canJSON = JSON.parse(children) !== null
-            if (canJSON) {
+            if (isValidJson(children)) {
               const elem_json = document.querySelector(`#${this.id}`);
               if (elem_json !== null) {
                 elem_json.data = JSON.parse(children);
