@@ -38,17 +38,35 @@ import '../packages/JsonViewer/dist/json-viewer'
   return (/*system*/) => {
     return {
       wrapComponents: {
-        HighlightCode: (Original, {}) => props => {
-          const { children } = props
-          const canJSON = JSON.parse(children) !== null
-          if (canJSON) {
-            return (
-              <div className="highlight-code">              
-                <json-viewer>{children}</json-viewer>
-              </div>
-            )
+        HighlightCode:  (Original, system) => class WrappedHightlightCode extends React.Component {
+          
+          shouldComponentUpdate(nextProps) {        
+            const nextChildren = nextProps.children;
+            const { children } = this.props 
+            
+            if (nextChildren !== children) {
+              return true;
+            } 
+          }          
+          
+          render() {
+            const { children } = this.props
+            const canJSON = JSON.parse(children) !== null
+            if (canJSON) {
+              const elem_json = document.querySelector('#json');
+              if (elem_json !== null) {
+                elem_json.data = JSON.parse(children);
+                return;
+              }
+              return (
+                <div className="highlight-code">              
+                  <json-viewer id="json">{children}</json-viewer>
+                </div>
+              )
+            }
+
+              return <Original {...this.props} />
           }
-          return <Original {...props} />
         }
       }
     }
