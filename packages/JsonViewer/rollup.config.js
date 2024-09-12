@@ -1,6 +1,5 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
-import minifyHTML from 'rollup-plugin-minify-html-literals';
 import { terser } from 'rollup-plugin-terser';
 import path from 'path';
 import litcss from 'rollup-plugin-lit-css';
@@ -30,7 +29,6 @@ const baseConfig = {
     },
     treeshake: true,
     plugins: [
-        minifyHTML(),
         typescript({
             project: 'tsconfig.json'
         }),
