@@ -1,4 +1,6 @@
 
+NOTE: this plugin is archived. The new alternative for openapi ui have cached up and this plugin is not necessary anymore. 
+
 # swagger-ui-json-folding-plugin
 Plugin for swagger-ui  add json folding 
 
